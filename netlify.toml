@@ -1,0 +1,36 @@
+[build]
+  publish = "site"
+
+# Redirects for stale external links
+[[redirects]]
+  from = "/contact-6"
+  to   = "/contact.html"
+  status = 301
+
+# Long-lived cache for versioned assets (images, video, fonts, JS, CSS)
+# Browser caches these for 1 year — no re-download on repeat visits.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML pages: always revalidate so updates go live immediately
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
